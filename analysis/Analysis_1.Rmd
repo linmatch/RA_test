@@ -5,26 +5,41 @@ date: "2024-03-27"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+library(readr)
+library(ggplot2)
+library(tidyr)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+df_state_total <- read_csv("/Users/linmatch/Desktop/RA/data/df_state_total.csv")
+#View(df_state_total)
+df_state_breakdown <- read_csv("/Users/linmatch/Desktop/RA/data/df_state-breakdown.csv")
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+##Data cleaning
+```{r}
+df_state_breakdown$Value <- as.numeric(sub("%", "", df_state_breakdown$Value))
+df_state_breakdown <- df_state_breakdown[!is.na(df_state_breakdown$Value), ]
+df_state_breakdown <- df_state_breakdown[df_state_breakdown$`Demographic Group` != "Other", ]
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+##Calculate difference between database and population
+```{r}
+df_state_pivot <- df_state_breakdown %>%
+  pivot_wider(names_from = Context, values_from = Value)
+df_state_pivot <- df_state_pivot[complete.cases(df_state_pivot$Database, df_state_pivot$Population),]
+
+df_state_pivot$Difference <- (df_state_pivot$Database - df_state_pivot$Population)/100
+```
+
+##Visualization
+```{r}
+ggplot(df_state_pivot, aes(x = State, y = Difference, fill = `Demographic Group`)) +
+geom_bar(stat = "identity", position =position_dodge2(preserve = "single")) +
+  labs(title = "Percentage Difference in Database Representation vs. Population by State",
+       x = "State", y = "Percentage Difference (%)",
+       fill = "Demographic Group") +
+  theme_minimal() 
+```
