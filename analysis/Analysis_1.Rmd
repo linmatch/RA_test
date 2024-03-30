@@ -2,7 +2,9 @@
 title: "Analysis1"
 author: "Manqing Lin"
 date: "2024-03-27"
-output: html_document
+output:
+  html_document:
+    code_folding: hide
 ---
 
 ```{r}
@@ -11,14 +13,14 @@ library(ggplot2)
 library(tidyr)
 ```
 
-
+# Import Data
 ```{r}
 df_state_total <- read_csv("/Users/linmatch/Desktop/RA/data/df_state_total.csv")
 #View(df_state_total)
 df_state_breakdown <- read_csv("/Users/linmatch/Desktop/RA/data/df_state-breakdown.csv")
 ```
 
-##Data preparation
+# Data preparation
 ```{r}
 df_state_breakdown$Value <- as.numeric(sub("%", "", df_state_breakdown$Value))
 df_state_breakdown <- df_state_breakdown[!is.na(df_state_breakdown$Value), ]
@@ -47,7 +49,9 @@ df_state_pivot2 <- df_state_breakdown %>%
 ```
 
 
-##Visualization
+# Data Visualization
+
+## Visualization 1
 ```{r}
 ggplot(df_total_pivot) +
   geom_bar(aes(x = Region, y = state_db_total, fill = Region), stat = "identity") + 
@@ -60,9 +64,10 @@ ggplot(df_total_pivot) +
        fill = "Region") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-Note:Here, we use the "df_state_total" to visualize the data. We can see from the graph that California has the largest number of observations in the state database, which corresponding to 16.30% of national database. The number of observations for Maine in the state database in the smallest, which corresponding to 0.20% of national database.
+Note: Here, we use the "df_state_total" to visualize the data. We can see from the graph that California has the largest number of observations in the state database, which corresponding to 16.30% of national database. The number of observations for Maine in the state database in the smallest, which corresponding to 0.20% of national database.
 
 
+## Visualization 2
 ```{r}
 ggplot(df_state_pivot, aes(x = State, y = Difference, fill = `Demographic Group`)) +
 geom_bar(stat = "identity", position =position_dodge2(preserve = "single")) +
@@ -75,6 +80,7 @@ geom_bar(stat = "identity", position =position_dodge2(preserve = "single")) +
 Note: Here, we use "df_state_breakdown" to visualize the difference between database representation and population for each demographic group in each state. From the graph, we can see that the demographic group of Black has larger proportion in database representation in all state, while the demographic group of Asian has smaller proportion in database representation in all state.
 
 
+## Visualization 3
 ```{r}
 ggplot(df_state_pivot2, aes(x = State, y = Database, fill = `Demographic Group`)) +
 geom_bar(stat = "identity") +
@@ -84,16 +90,17 @@ geom_bar(stat = "identity") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-Note:Here, we focus solely on the composition of database representation in each state. From this graph, we can see how database representation in each state is composed by different demographic group. For example, we can see that the database representation in Maine compose largely by demographic group white. 
+Note: Here, we focus solely on the composition of database representation in each state. From this graph, we can see how database representation in each state is composed by different demographic group. For example, we can see that the database representation in Maine compose largely by demographic group white. 
 
 
+## Visualization 4
 ```{r}
 ggplot(df_state_pivot2, aes(x = State, y = Population, fill = `Demographic Group`)) +
 geom_bar(stat = "identity") +
-  labs(title = "Compare composition of Population Representation of each state",
+  labs(title = "Compare composition of Population of each state",
        x = "State", y = "Value(%)",
        fill = "Demographic Group") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-Note:Here, we focus solely on the composition of population in each state. From this graph, we can see how population in each state is composed by different demographic group. For example, we can see that the population in Maine compose largely by demographic group white. 
+Note: Here, we focus solely on the composition of population in each state. From this graph, we can see how population in each state is composed by different demographic group. For example, we can see that the population in Maine compose largely by demographic group white. 
