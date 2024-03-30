@@ -25,6 +25,19 @@ df_state_breakdown <- df_state_breakdown[!is.na(df_state_breakdown$Value), ]
 df_state_breakdown <- df_state_breakdown[df_state_breakdown$`Demographic Group` != "Other", ]
 ```
 
+```{r}
+df=df_state_total[df_state_total$Demographic=='state_db_total',]
+ggplot(df, aes(x = Region, y = Value, fill = Region)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label=Value), vjust=1.6, size=3.5, color="black")+
+  labs(title = "State Database Total",
+       x = "State",
+       y = "State Database Total") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  scale_y_continuous(labels = scales::comma)
+```
+
+
 ##Calculate difference between database and population
 ```{r}
 df_state_pivot <- df_state_breakdown %>%
@@ -39,7 +52,27 @@ df_state_pivot$Difference <- (df_state_pivot$Database - df_state_pivot$Populatio
 ggplot(df_state_pivot, aes(x = State, y = Difference, fill = `Demographic Group`)) +
 geom_bar(stat = "identity", position =position_dodge2(preserve = "single")) +
   labs(title = "Percentage Difference in Database Representation vs. Population by State",
-       x = "State", y = "Percentage Difference (%)",
+       x = "State", y = "Difference",
        fill = "Demographic Group") +
   theme_minimal() 
 ```
+
+
+```{r}
+ggplot(df_state_pivot, aes(x = State, y = Database, fill = `Demographic Group`)) +
+geom_bar(stat = "identity") +
+  labs(title = "Compare Percentage of Database Representation of each state",
+       x = "State", y = "Value(%)",
+       fill = "Demographic Group") +
+  theme_minimal() 
+```
+
+```{r}
+ggplot(df_state_pivot, aes(x = State, y = Population, fill = `Demographic Group`)) +
+geom_bar(stat = "identity") +
+  labs(title = "Compare Percentage of Population Representation of each state",
+       x = "State", y = "Value(%)",
+       fill = "Demographic Group") +
+  theme_minimal() 
+```
+
