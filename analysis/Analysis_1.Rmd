@@ -18,7 +18,7 @@ df_state_total <- read_csv("/Users/linmatch/Desktop/RA/data/df_state_total.csv")
 df_state_breakdown <- read_csv("/Users/linmatch/Desktop/RA/data/df_state-breakdown.csv")
 ```
 
-##Data cleaning
+##Data preparation
 ```{r}
 df_state_breakdown$Value <- as.numeric(sub("%", "", df_state_breakdown$Value))
 df_state_breakdown <- df_state_breakdown[!is.na(df_state_breakdown$Value), ]
@@ -26,53 +26,74 @@ df_state_breakdown <- df_state_breakdown[df_state_breakdown$`Demographic Group` 
 ```
 
 ```{r}
-df=df_state_total[df_state_total$Demographic=='state_db_total',]
-ggplot(df, aes(x = Region, y = Value, fill = Region)) +
-  geom_bar(stat = "identity") +
-  geom_text(aes(label=Value), vjust=1.6, size=3.5, color="black")+
-  labs(title = "State Database Total",
-       x = "State",
-       y = "State Database Total") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-  scale_y_continuous(labels = scales::comma)
+df_total_pivot <- df_state_total %>%
+  pivot_wider(names_from = Demographic, values_from = Value)
+df_total_pivot$percent_of_national_db <- as.numeric(sub("%", "", df_total_pivot$percent_of_national_db))
+df_total_pivot$state_db_total <- as.numeric(df_total_pivot$state_db_total)
 ```
 
-
-##Calculate difference between database and population
 ```{r}
 df_state_pivot <- df_state_breakdown %>%
   pivot_wider(names_from = Context, values_from = Value)
 df_state_pivot <- df_state_pivot[complete.cases(df_state_pivot$Database, df_state_pivot$Population),]
 
+##Calculate difference between database and population
 df_state_pivot$Difference <- (df_state_pivot$Database - df_state_pivot$Population)/100
 ```
 
+```{r}
+df_state_pivot2 <- df_state_breakdown %>%
+  pivot_wider(names_from = Context, values_from = Value)
+```
+
+
 ##Visualization
+```{r}
+ggplot(df_total_pivot) +
+  geom_bar(aes(x = Region, y = state_db_total, fill = Region), stat = "identity") + 
+  geom_line(aes(x = Region, y = percent_of_national_db*100000, group=1), color = "red")+  scale_y_continuous(name = "State Database Total",labels = function(x) format(x, scientific = FALSE), sec.axis = sec_axis(~./100000, labels = function(x) format(x, scientific = FALSE), name = "% of National Database")) +
+   geom_text(aes(x = Region, y = state_db_total, label = scales::comma(state_db_total), vjust = -0.5), color = "black", size = 3) +
+  geom_text(aes(x = Region, y = percent_of_national_db*100000, label = scales::percent(percent_of_national_db/100), vjust = 1.5), color = "blue", size = 3) +
+  labs(title = "Database Total and Percent of National Database",
+       x = "State",
+       y = "State Database Total",
+       fill = "Region") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+Note:Here, we use the "df_state_total" to visualize the data. We can see from the graph that California has the largest number of observations in the state database, which corresponding to 16.30% of national database. The number of observations for Maine in the state database in the smallest, which corresponding to 0.20% of national database.
+
+
 ```{r}
 ggplot(df_state_pivot, aes(x = State, y = Difference, fill = `Demographic Group`)) +
 geom_bar(stat = "identity", position =position_dodge2(preserve = "single")) +
   labs(title = "Percentage Difference in Database Representation vs. Population by State",
        x = "State", y = "Difference",
        fill = "Demographic Group") +
-  theme_minimal() 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+Note: Here, we use "df_state_breakdown" to visualize the difference between database representation and population for each demographic group in each state. From the graph, we can see that the demographic group of Black has larger proportion in database representation in all state, while the demographic group of Asian has smaller proportion in database representation in all state.
 
 
 ```{r}
-ggplot(df_state_pivot, aes(x = State, y = Database, fill = `Demographic Group`)) +
+ggplot(df_state_pivot2, aes(x = State, y = Database, fill = `Demographic Group`)) +
 geom_bar(stat = "identity") +
-  labs(title = "Compare Percentage of Database Representation of each state",
+  labs(title = "Compare composition of Database Representation of each state",
        x = "State", y = "Value(%)",
        fill = "Demographic Group") +
-  theme_minimal() 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+Note:Here, we focus solely on the composition of database representation in each state. From this graph, we can see how database representation in each state is composed by different demographic group. For example, we can see that the database representation in Maine compose largely by demographic group white. 
+
 
 ```{r}
-ggplot(df_state_pivot, aes(x = State, y = Population, fill = `Demographic Group`)) +
+ggplot(df_state_pivot2, aes(x = State, y = Population, fill = `Demographic Group`)) +
 geom_bar(stat = "identity") +
-  labs(title = "Compare Percentage of Population Representation of each state",
+  labs(title = "Compare composition of Population Representation of each state",
        x = "State", y = "Value(%)",
        fill = "Demographic Group") +
-  theme_minimal() 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-
+Note:Here, we focus solely on the composition of population in each state. From this graph, we can see how population in each state is composed by different demographic group. For example, we can see that the population in Maine compose largely by demographic group white. 
