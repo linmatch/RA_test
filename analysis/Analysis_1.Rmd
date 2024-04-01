@@ -11,6 +11,7 @@ output:
 library(readr)
 library(ggplot2)
 library(tidyr)
+library(ggsci) 
 ```
 
 # Import Data
@@ -55,14 +56,14 @@ df_state_pivot2 <- df_state_breakdown %>%
 ```{r}
 ggplot(df_total_pivot) +
   geom_bar(aes(x = Region, y = state_db_total, fill = Region), stat = "identity") + 
-  geom_line(aes(x = Region, y = percent_of_national_db*100000, group=1), color = "red")+  scale_y_continuous(name = "State Database Total",labels = function(x) format(x, scientific = FALSE), sec.axis = sec_axis(~./100000, labels = function(x) format(x, scientific = FALSE), name = "% of National Database")) +
+  geom_line(aes(x = Region, y = percent_of_national_db*100000, group=1), color = "black")+  scale_y_continuous(name = "State Database Total",labels = function(x) format(x, scientific = FALSE), sec.axis = sec_axis(~./100000, labels = function(x) format(x, scientific = FALSE), name = "% of National Database")) +
    geom_text(aes(x = Region, y = state_db_total, label = scales::comma(state_db_total), vjust = -0.5), color = "black", size = 3) +
-  geom_text(aes(x = Region, y = percent_of_national_db*100000, label = scales::percent(percent_of_national_db/100), vjust = 1.5), color = "blue", size = 3) +
+  geom_text(aes(x = Region, y = percent_of_national_db*100000, label = scales::percent(percent_of_national_db/100), vjust = 1.5), color = "white", size = 3) +
   labs(title = "Database Total and Percent of National Database",
        x = "State",
        y = "State Database Total",
        fill = "Region") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+ scale_fill_jama()
 ```
 Note: Here, we use the "df_state_total" to visualize the data. We can see from the graph that California has the largest number of observations in the state database, which corresponding to 16.30% of national database. The number of observations for Maine in the state database in the smallest, which corresponding to 0.20% of national database.
 
@@ -75,7 +76,7 @@ geom_bar(stat = "identity", position =position_dodge2(preserve = "single")) +
        x = "State", y = "Difference",
        fill = "Demographic Group") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+ scale_fill_jama()
 ```
 Note: Here, we use "df_state_breakdown" to visualize the difference between database representation and population for each demographic group in each state. From the graph, we can see that the demographic group of Black has larger proportion in database representation in all state, while the demographic group of Asian has smaller proportion in database representation in all state.
 
@@ -83,12 +84,13 @@ Note: Here, we use "df_state_breakdown" to visualize the difference between data
 ## Visualization 3
 ```{r}
 ggplot(df_state_pivot2, aes(x = State, y = Database, fill = `Demographic Group`)) +
-geom_bar(stat = "identity") +
+geom_bar(stat = "identity", position="dodge") +
+  coord_flip()+
   labs(title = "Compare composition of Database Representation of each state",
        x = "State", y = "Value(%)",
        fill = "Demographic Group") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme_minimal() + 
+  scale_fill_jama()
 ```
 Note: Here, we focus solely on the composition of database representation in each state. From this graph, we can see how database representation in each state is composed by different demographic group. For example, we can see that the database representation in Maine compose largely by demographic group white. 
 
@@ -96,11 +98,12 @@ Note: Here, we focus solely on the composition of database representation in eac
 ## Visualization 4
 ```{r}
 ggplot(df_state_pivot2, aes(x = State, y = Population, fill = `Demographic Group`)) +
-geom_bar(stat = "identity") +
+geom_bar(stat = "identity", position="dodge") +
+  coord_flip()+
   labs(title = "Compare composition of Population of each state",
        x = "State", y = "Value(%)",
        fill = "Demographic Group") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  scale_fill_jama()
 ```
 Note: Here, we focus solely on the composition of population in each state. From this graph, we can see how population in each state is composed by different demographic group. For example, we can see that the population in Maine compose largely by demographic group white. 

@@ -5,26 +5,34 @@ date: "2024-03-27"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+library(readr)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+df_flavor <- read_csv("data/df_flavor.csv")
+#View(df_flavor)
 ```
 
-## Including Plots
+# What have been done:
+#### Visualization: 
+1. Correlation Matrix
+2. Comparison of Flavor Perception Between Gum Types(Side-by-Side plot)
+3. Difference of Flavor Perception Between Gum Types
+4. Comparison of Flavor Perception Between Gum Types by different copy number group
+5. Comparison of change in Flavor Perception by different group("CNV_group", "sAA_After_Group" etc.)
 
-You can also embed plots, for example:
+#### Dim Reduction:
+1. PCA
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+# More to do:
+## Statistical test:
+1. ANOVA test: Test if there is significant difference of certain flavor perception for 2 sample gums at certain time point.
+2. ANOVA test: Test if there is significant difference of certain flavor perception for different gene copy numbers group (low vs. high) with certain sample gums at certain time point.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Visualization:
+1. How sample position affect the flavor perception trend
+
+## Prediction & Inference:
+1. Use time series forecasting models (e.g., ARIMA) to predict future flavor perception trends based on historical data.
+2. Apply regression model to explore the relationship between certain flavor perception at certain time points and predictors such as gene copy number, age, gender, race etc. 

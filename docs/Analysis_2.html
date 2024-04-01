@@ -382,7 +382,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-03-26
+<strong>Last updated:</strong> 2024-03-31
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -420,10 +420,10 @@ changes </a>
 <div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R
-Markdown file created these results, you’ll want to first commit it to
-the Git repo. If you’re still working on the analysis, you can ignore
-this warning. When you’re finished, you can run
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
 <code>wflow_publish</code> to commit the R Markdown file and build the
 HTML.</p>
 </div>
@@ -516,13 +516,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong3fa644e">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttree6a63437b4d3619fad894a550a7cb94f7974b7356targetblank6a63437a">
 <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong> 3fa644e
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/linmatch/RA_test/tree/6a63437b4d3619fad894a550a7cb94f7974b7356" target="_blank">6a63437</a>
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong3fa644e"
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttree6a63437b4d3619fad894a550a7cb94f7974b7356targetblank6a63437a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -531,7 +533,8 @@ and connecting the code version to the results is critical for
 reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version 3fa644e.
+The results in this page were generated with repository version
+<a href="https://github.com/linmatch/RA_test/tree/6a63437b4d3619fad894a550a7cb94f7974b7356" target="_blank">6a63437</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -546,16 +549,17 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    data/.DS_Store
 
 Untracked files:
-    Untracked:  analysis/Analysis_1.Rmd
-    Untracked:  analysis/Analysis_2.Rmd
-    Untracked:  df_state-breakdown.csv
-    Untracked:  df_state_total.csv
+    Untracked:  data/df_flavor.csv
 
 Unstaged changes:
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/Analysis_1.Rmd
+    Modified:   analysis/Analysis_2.Rmd
 
 </code></pre>
 <p>
@@ -570,40 +574,138 @@ have uncommitted changes.
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with
-<code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/Analysis_2.Rmd</code>) and HTML
+(<code>docs/Analysis_2.html</code>) files. If you’ve configured a remote
+Git repository (see <code>?wflow_git_remote</code>), click on the
+hyperlinks in the table below to view the files as they were in that
+past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/f69f746eb2f42841843aba1db1fc6c0a1cc78532/analysis/Analysis_2.Rmd" target="_blank">f69f746</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-27
+</td>
+<td>
+initial change
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/linmatch/RA_test/f69f746eb2f42841843aba1db1fc6c0a1cc78532/docs/Analysis_2.html" target="_blank">f69f746</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-27
+</td>
+<td>
+initial change
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
 </div>
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting
-syntax for authoring HTML, PDF, and MS Word documents. For more details
-on using R Markdown see <a href="http://rmarkdown.rstudio.com"
-class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be
-generated that includes both content as well as the output of any
-embedded R code chunks within the document. You can embed an R code
-chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>     speed           dist       
- Min.   : 4.0   Min.   :  2.00  
- 1st Qu.:12.0   1st Qu.: 26.00  
- Median :15.0   Median : 36.00  
- Mean   :15.4   Mean   : 42.98  
- 3rd Qu.:19.0   3rd Qu.: 56.00  
- Max.   :25.0   Max.   :120.00  </code></pre>
+<pre class="r"><code>library(readr)</code></pre>
+<pre class="r"><code>df_flavor &lt;- read_csv(&quot;data/df_flavor.csv&quot;)</code></pre>
+<pre><code>Rows: 1200 Columns: 126
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr   (2): Sample_Name, Attribute
+dbl (124): Sample_ID, Sample_Position, Blinding_Code, time_0s, time_1s, time...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>#View(df_flavor)</code></pre>
+<div id="what-have-been-done" class="section level1">
+<h1>What have been done:</h1>
+<div id="visualization" class="section level4">
+<h4>Visualization:</h4>
+<ol style="list-style-type: decimal">
+<li>Correlation Matrix</li>
+<li>Comparison of Flavor Perception Between Gum Types(Side-by-Side
+plot)</li>
+<li>Difference of Flavor Perception Between Gum Types</li>
+<li>Comparison of Flavor Perception Between Gum Types by different copy
+number group</li>
+<li>Comparison of change in Flavor Perception by different
+group(“CNV_group”, “sAA_After_Group” etc.)</li>
+</ol>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="figure/Analysis_2.Rmd/pressure-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
+<div id="dim-reduction" class="section level4">
+<h4>Dim Reduction:</h4>
+<ol style="list-style-type: decimal">
+<li>PCA</li>
+</ol>
+</div>
+</div>
+<div id="more-to-do" class="section level1">
+<h1>More to do:</h1>
+<div id="statistical-test" class="section level2">
+<h2>Statistical test:</h2>
+<ol style="list-style-type: decimal">
+<li>ANOVA test: Test if there is significant difference of certain
+flavor perception for 2 sample gums at certain time point.</li>
+<li>ANOVA test: Test if there is significant difference of certain
+flavor perception for different gene copy numbers group (low vs. high)
+with certain sample gums at certain time point.</li>
+</ol>
+</div>
+<div id="visualization-1" class="section level2">
+<h2>Visualization:</h2>
+<ol style="list-style-type: decimal">
+<li>How sample position affect the flavor perception trend</li>
+</ol>
+</div>
+<div id="prediction-inference" class="section level2">
+<h2>Prediction &amp; Inference:</h2>
+<ol style="list-style-type: decimal">
+<li>Use time series forecasting models (e.g., ARIMA) to predict future
+flavor perception trends based on historical data.</li>
+<li>Apply regression model to explore the relationship between certain
+flavor perception at certain time points and predictors such as gene
+copy number, age, gender, race etc.</li>
+</ol>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -631,20 +733,23 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.7.1
+[1] readr_2.1.5     workflowr_1.7.1
 
 loaded via a namespace (and not attached):
- [1] jsonlite_1.8.8    compiler_4.3.2    highr_0.10        promises_1.2.1   
- [5] Rcpp_1.0.12       stringr_1.5.1     git2r_0.33.0      callr_3.7.3      
- [9] later_1.3.2       jquerylib_0.1.4   yaml_2.3.8        fastmap_1.1.1    
-[13] R6_2.5.1          knitr_1.45        tibble_3.2.1      rprojroot_2.0.4  
-[17] bslib_0.6.1       pillar_1.9.0      rlang_1.1.3       utf8_1.2.4       
-[21] cachem_1.0.8      stringi_1.8.3     httpuv_1.6.14     xfun_0.41        
-[25] getPass_0.2-4     fs_1.6.3          sass_0.4.8        cli_3.6.2        
-[29] magrittr_2.0.3    ps_1.7.6          digest_0.6.34     processx_3.8.3   
-[33] rstudioapi_0.15.0 lifecycle_1.0.4   vctrs_0.6.5       evaluate_0.23    
-[37] glue_1.7.0        whisker_0.4.1     fansi_1.0.6       rmarkdown_2.25   
-[41] httr_1.4.7        tools_4.3.2       pkgconfig_2.0.3   htmltools_0.5.7  </code></pre>
+ [1] bit_4.0.5         archive_1.1.7     jsonlite_1.8.8    crayon_1.5.2     
+ [5] compiler_4.3.2    promises_1.2.1    tidyselect_1.2.0  Rcpp_1.0.12      
+ [9] stringr_1.5.1     git2r_0.33.0      parallel_4.3.2    callr_3.7.3      
+[13] later_1.3.2       jquerylib_0.1.4   yaml_2.3.8        fastmap_1.1.1    
+[17] R6_2.5.1          knitr_1.45        tibble_3.2.1      rprojroot_2.0.4  
+[21] tzdb_0.4.0        bslib_0.6.1       pillar_1.9.0      rlang_1.1.3      
+[25] utf8_1.2.4        cachem_1.0.8      stringi_1.8.3     httpuv_1.6.14    
+[29] xfun_0.41         getPass_0.2-4     fs_1.6.3          sass_0.4.8       
+[33] bit64_4.0.5       cli_3.6.2         magrittr_2.0.3    ps_1.7.6         
+[37] digest_0.6.34     processx_3.8.3    vroom_1.6.5       rstudioapi_0.15.0
+[41] hms_1.1.3         lifecycle_1.0.4   vctrs_0.6.5       evaluate_0.23    
+[45] glue_1.7.0        whisker_0.4.1     fansi_1.0.6       rmarkdown_2.25   
+[49] httr_1.4.7        tools_4.3.2       pkgconfig_2.0.3   htmltools_0.5.7  </code></pre>
+</div>
 </div>
 </div>
 

@@ -382,7 +382,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-03-30
+<strong>Last updated:</strong> 2024-03-31
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -550,15 +550,15 @@ data/df_state-breakdown.csv
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttreef0132d96d4fb52e1e98b8049d5869c13097940c3targetblankf0132d9a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttree6a63437b4d3619fad894a550a7cb94f7974b7356targetblank6a63437a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/linmatch/RA_test/tree/f0132d96d4fb52e1e98b8049d5869c13097940c3" target="_blank">f0132d9</a>
+<a href="https://github.com/linmatch/RA_test/tree/6a63437b4d3619fad894a550a7cb94f7974b7356" target="_blank">6a63437</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttreef0132d96d4fb52e1e98b8049d5869c13097940c3targetblankf0132d9a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttree6a63437b4d3619fad894a550a7cb94f7974b7356targetblank6a63437a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -568,7 +568,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/linmatch/RA_test/tree/f0132d96d4fb52e1e98b8049d5869c13097940c3" target="_blank">f0132d9</a>.
+<a href="https://github.com/linmatch/RA_test/tree/6a63437b4d3619fad894a550a7cb94f7974b7356" target="_blank">6a63437</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -588,8 +588,12 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
 
+Untracked files:
+    Untracked:  data/df_flavor.csv
+
 Unstaged changes:
     Modified:   analysis/Analysis_1.Rmd
+    Modified:   analysis/Analysis_2.Rmd
 
 </code></pre>
 <p>
@@ -635,6 +639,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/6a63437b4d3619fad894a550a7cb94f7974b7356/analysis/Analysis_1.Rmd" target="_blank">6a63437</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-30
+</td>
+<td>
+comm
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/linmatch/RA_test/6a63437b4d3619fad894a550a7cb94f7974b7356/docs/Analysis_1.html" target="_blank">6a63437</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-30
+</td>
+<td>
+comm
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -729,7 +767,8 @@ initial change
 </div>
 <pre class="r"><code>library(readr)
 library(ggplot2)
-library(tidyr)</code></pre>
+library(tidyr)
+library(ggsci) </code></pre>
 <div id="import-data" class="section level1">
 <h1>Import Data</h1>
 <pre class="r"><code>df_state_total &lt;- read_csv(&quot;/Users/linmatch/Desktop/RA/data/df_state_total.csv&quot;)</code></pre>
@@ -774,16 +813,53 @@ df_state_pivot$Difference &lt;- (df_state_pivot$Database - df_state_pivot$Popula
 <h2>Visualization 1</h2>
 <pre class="r"><code>ggplot(df_total_pivot) +
   geom_bar(aes(x = Region, y = state_db_total, fill = Region), stat = &quot;identity&quot;) + 
-  geom_line(aes(x = Region, y = percent_of_national_db*100000, group=1), color = &quot;red&quot;)+  scale_y_continuous(name = &quot;State Database Total&quot;,labels = function(x) format(x, scientific = FALSE), sec.axis = sec_axis(~./100000, labels = function(x) format(x, scientific = FALSE), name = &quot;% of National Database&quot;)) +
+  geom_line(aes(x = Region, y = percent_of_national_db*100000, group=1), color = &quot;black&quot;)+  scale_y_continuous(name = &quot;State Database Total&quot;,labels = function(x) format(x, scientific = FALSE), sec.axis = sec_axis(~./100000, labels = function(x) format(x, scientific = FALSE), name = &quot;% of National Database&quot;)) +
    geom_text(aes(x = Region, y = state_db_total, label = scales::comma(state_db_total), vjust = -0.5), color = &quot;black&quot;, size = 3) +
-  geom_text(aes(x = Region, y = percent_of_national_db*100000, label = scales::percent(percent_of_national_db/100), vjust = 1.5), color = &quot;blue&quot;, size = 3) +
+  geom_text(aes(x = Region, y = percent_of_national_db*100000, label = scales::percent(percent_of_national_db/100), vjust = 1.5), color = &quot;white&quot;, size = 3) +
   labs(title = &quot;Database Total and Percent of National Database&quot;,
        x = &quot;State&quot;,
        y = &quot;State Database Total&quot;,
        fill = &quot;Region&quot;) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
-<p><img src="figure/Analysis_1.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
-Note: Here, we use the “df_state_total” to visualize the data. We can
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+ scale_fill_jama()</code></pre>
+<p><img src="figure/Analysis_1.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/6a63437b4d3619fad894a550a7cb94f7974b7356/docs/figure/Analysis_1.Rmd/unnamed-chunk-7-1.png" target="_blank">6a63437</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Note: Here, we use the “df_state_total” to visualize the data. We can
 see from the graph that California has the largest number of
 observations in the state database, which corresponding to 16.30% of
 national database. The number of observations for Maine in the state
@@ -798,9 +874,46 @@ geom_bar(stat = &quot;identity&quot;, position =position_dodge2(preserve = &quot
        x = &quot;State&quot;, y = &quot;Difference&quot;,
        fill = &quot;Demographic Group&quot;) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
-<p><img src="figure/Analysis_1.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
-Note: Here, we use “df_state_breakdown” to visualize the difference
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+ scale_fill_jama()</code></pre>
+<p><img src="figure/Analysis_1.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/6a63437b4d3619fad894a550a7cb94f7974b7356/docs/figure/Analysis_1.Rmd/unnamed-chunk-8-1.png" target="_blank">6a63437</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Note: Here, we use “df_state_breakdown” to visualize the difference
 between database representation and population for each demographic
 group in each state. From the graph, we can see that the demographic
 group of Black has larger proportion in database representation in all
@@ -810,15 +923,53 @@ database representation in all state.</p>
 <div id="visualization-3" class="section level2">
 <h2>Visualization 3</h2>
 <pre class="r"><code>ggplot(df_state_pivot2, aes(x = State, y = Database, fill = `Demographic Group`)) +
-geom_bar(stat = &quot;identity&quot;) +
+geom_bar(stat = &quot;identity&quot;, position=&quot;dodge&quot;) +
+  coord_flip()+
   labs(title = &quot;Compare composition of Database Representation of each state&quot;,
        x = &quot;State&quot;, y = &quot;Value(%)&quot;,
        fill = &quot;Demographic Group&quot;) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
-<pre><code>Warning: Removed 2 rows containing missing values (`position_stack()`).</code></pre>
-<p><img src="figure/Analysis_1.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
-Note: Here, we focus solely on the composition of database
+  theme_minimal() + 
+  scale_fill_jama()</code></pre>
+<pre><code>Warning: Removed 2 rows containing missing values (`geom_bar()`).</code></pre>
+<p><img src="figure/Analysis_1.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/6a63437b4d3619fad894a550a7cb94f7974b7356/docs/figure/Analysis_1.Rmd/unnamed-chunk-9-1.png" target="_blank">6a63437</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Note: Here, we focus solely on the composition of database
 representation in each state. From this graph, we can see how database
 representation in each state is composed by different demographic group.
 For example, we can see that the database representation in Maine
@@ -827,15 +978,53 @@ compose largely by demographic group white.</p>
 <div id="visualization-4" class="section level2">
 <h2>Visualization 4</h2>
 <pre class="r"><code>ggplot(df_state_pivot2, aes(x = State, y = Population, fill = `Demographic Group`)) +
-geom_bar(stat = &quot;identity&quot;) +
+geom_bar(stat = &quot;identity&quot;, position=&quot;dodge&quot;) +
+  coord_flip()+
   labs(title = &quot;Compare composition of Population of each state&quot;,
        x = &quot;State&quot;, y = &quot;Value(%)&quot;,
        fill = &quot;Demographic Group&quot;) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
-<pre><code>Warning: Removed 3 rows containing missing values (`position_stack()`).</code></pre>
-<p><img src="figure/Analysis_1.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" />
-Note: Here, we focus solely on the composition of population in each
+  scale_fill_jama()</code></pre>
+<pre><code>Warning: Removed 3 rows containing missing values (`geom_bar()`).</code></pre>
+<p><img src="figure/Analysis_1.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/6a63437b4d3619fad894a550a7cb94f7974b7356/docs/figure/Analysis_1.Rmd/unnamed-chunk-10-1.png" target="_blank">6a63437</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-30
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Note: Here, we focus solely on the composition of population in each
 state. From this graph, we can see how population in each state is
 composed by different demographic group. For example, we can see that
 the population in Maine compose largely by demographic group white.</p>
@@ -866,7 +1055,8 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] tidyr_1.3.1     ggplot2_3.4.4   readr_2.1.5     workflowr_1.7.1
+[1] ggsci_3.0.3     tidyr_1.3.1     ggplot2_3.4.4   readr_2.1.5    
+[5] workflowr_1.7.1
 
 loaded via a namespace (and not attached):
  [1] sass_0.4.8        utf8_1.2.4        generics_0.1.3    stringi_1.8.3    
