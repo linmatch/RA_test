@@ -20,15 +20,15 @@ df_flavor <- read_csv("data/df_flavor.csv")
 2. Comparison of Flavor Perception Between Gum Types(Side-by-Side plot)
 3. Difference of Flavor Perception Between Gum Types
 4. Comparison of Flavor Perception Between Gum Types by different copy number group
-5. Comparison of change in Flavor Perception by different group("CNV_group", "sAA_After_Group" etc.)
+5. Comparison of type of change in Flavor Perception by different group("CNV_group", "sAA_After_Group" etc.)
 
 #### Dim Reduction:
 1. PCA
 
 # More to do:
 ## Statistical test:
-1. ANOVA test: Test if there is significant difference of certain flavor perception for 2 sample gums at certain time point.
-2. ANOVA test: Test if there is significant difference of certain flavor perception for different gene copy numbers group (low vs. high) with certain sample gums at certain time point.
+1. t-test: Test if there is significant difference of certain flavor perception for 2 sample gums at certain time point of interest (e.g., time_1s, time_2s, etc.). 
+2. t-test: Test if there is significant difference of certain flavor perception for different gene copy numbers group (low vs. high) with certain sample gums (Free Limonene or Starch-Limonene Inclusion Complex) at certain time point of interest (e.g., time_1s, time_2s, etc.).
 
 ## Visualization:
 1. How sample position affect the flavor perception trend

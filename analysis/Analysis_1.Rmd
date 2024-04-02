@@ -63,7 +63,9 @@ ggplot(df_total_pivot) +
        x = "State",
        y = "State Database Total",
        fill = "Region") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))+ scale_fill_jama()
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+    theme(panel.background = element_rect(fill = "gray86"))+ 
+  scale_fill_jama()
 ```
 Note: Here, we use the "df_state_total" to visualize the data. We can see from the graph that California has the largest number of observations in the state database, which corresponding to 16.30% of national database. The number of observations for Maine in the state database in the smallest, which corresponding to 0.20% of national database.
 
@@ -72,7 +74,7 @@ Note: Here, we use the "df_state_total" to visualize the data. We can see from t
 ```{r}
 ggplot(df_state_pivot, aes(x = State, y = Difference, fill = `Demographic Group`)) +
 geom_bar(stat = "identity", position =position_dodge2(preserve = "single")) +
-  labs(title = "Percentage Difference in Database Representation vs. Population by State",
+  labs(title = "Difference in Database Representation vs. Population by State",
        x = "State", y = "Difference",
        fill = "Demographic Group") +
   theme_minimal() +
@@ -83,11 +85,11 @@ Note: Here, we use "df_state_breakdown" to visualize the difference between data
 
 ## Visualization 3
 ```{r}
-ggplot(df_state_pivot2, aes(x = State, y = Database, fill = `Demographic Group`)) +
+ggplot(df_state_pivot2, aes(x = State, y = Database/100, fill = `Demographic Group`)) +
 geom_bar(stat = "identity", position="dodge") +
   coord_flip()+
-  labs(title = "Compare composition of Database Representation of each state",
-       x = "State", y = "Value(%)",
+  labs(title = "Compare composition of Database Representation of each State",
+       x = "State", y = "Value",
        fill = "Demographic Group") +
   theme_minimal() + 
   scale_fill_jama()
@@ -97,11 +99,11 @@ Note: Here, we focus solely on the composition of database representation in eac
 
 ## Visualization 4
 ```{r}
-ggplot(df_state_pivot2, aes(x = State, y = Population, fill = `Demographic Group`)) +
+ggplot(df_state_pivot2, aes(x = State, y = Population/100, fill = `Demographic Group`)) +
 geom_bar(stat = "identity", position="dodge") +
   coord_flip()+
-  labs(title = "Compare composition of Population of each state",
-       x = "State", y = "Value(%)",
+  labs(title = "Compare composition of Population of each State",
+       x = "State", y = "Value",
        fill = "Demographic Group") +
   theme_minimal() +
   scale_fill_jama()
