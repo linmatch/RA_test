@@ -7,12 +7,64 @@ output: html_document
 
 ```{r}
 library(readr)
+library(tidyr)
+library(dplyr)
+library(stringr)
+
 ```
 
 ```{r}
-df_flavor <- read_csv("data/df_flavor.csv")
+df_flavor <- read_csv("/Users/linmatch/Desktop/RA/data/df_flavor.csv")
 #View(df_flavor)
 ```
+
+```{r}
+data_long <- df_flavor %>%
+  select(-c(Blinding_Code, Sample_Position)) %>%
+  pivot_longer(cols = starts_with("time_"),
+               names_to = "Time",
+               names_prefix = "time_", 
+               values_to = "Value") %>%
+  mutate(Time = as.numeric(str_remove(Time, "s")),
+         Sample_ID = as.factor(Sample_ID),
+         Sample_Name = ifelse(Sample_Name == "Starch-Limonene Inclusion Complex",
+                                "Starch-Limonene IC",
+                                Sample_Name),
+         Sample_Name = as.factor(Sample_Name),
+         Attribute = as.factor(Attribute))
+```
+
+```{r}
+data_summary <- data_long %>%
+  group_by(Sample_Name, Attribute) %>%
+  summarise(mean = mean(Value, na.rm = TRUE),
+            sd = sd(Value, na.rm = TRUE),
+            .groups = "drop")  # drop grouping afterwards
+```
+
+```{r}
+data_summary <- data_long %>%
+  group_by(Sample_Name, Attribute, Time) %>%
+  summarise(mean_value = mean(Value, na.rm = TRUE), .groups = "drop")
+```
+
+```{r}
+data_sweet_30s <- data_long %>%
+  filter(Time == 30, Attribute == "Sweet")
+
+# Extract the data for the two samples
+data_free_limonene <- data_sweet_30s %>% filter(Sample_Name == "Free Limonene")
+data_starch_limonene_ic <- data_sweet_30s %>% filter(Sample_Name == "Starch-Limonene IC")
+
+# Perform the two-proportion z-test
+z_test <- prop.test(x = c(sum(data_free_limonene$Value), sum(data_starch_limonene_ic$Value)),
+                    n = c(nrow(data_free_limonene), nrow(data_starch_limonene_ic)),
+                    alternative = "two.sided")
+
+# Print the results
+print(z_test)
+```
+
 
 # What have been done:
 #### Visualization: 
@@ -27,12 +79,26 @@ df_flavor <- read_csv("data/df_flavor.csv")
 
 # More to do:
 ## Statistical test:
-1. t-test: Test if there is significant difference of certain flavor perception for 2 sample gums at certain time point of interest (e.g., time_1s, time_2s, etc.). 
-2. t-test: Test if there is significant difference of certain flavor perception for different gene copy numbers group (low vs. high) with certain sample gums (Free Limonene or Starch-Limonene Inclusion Complex) at certain time point of interest (e.g., time_1s, time_2s, etc.).
+1. proportion test: Test if there is significant difference in proportion of certain flavor perception for 2 sample gums at certain time point of interest (e.g., time_1s, time_2s, etc.). 
+2. proportion test: Test if there is significant difference in proportion of certain flavor perception for different gene copy numbers group (low vs. high) with certain sample gums (Free Limonene or Starch-Limonene Inclusion Complex) at certain time point of interest (e.g., time_1s, time_2s, etc.).
+3. Chi-square test of independence: Test if flavor perception (yes/no) and gum type are independent or if there is an association between them.
 
 ## Visualization:
-1. How sample position affect the flavor perception trend
+1. How sample position affect the flavor perception trend?
 
-## Prediction & Inference:
-1. Use time series forecasting models (e.g., ARIMA) to predict future flavor perception trends based on historical data.
-2. Apply regression model to explore the relationship between certain flavor perception at certain time points and predictors such as gene copy number, age, gender, race etc. 
+## Statistical Modeling:
+1. Apply a generalized linear mixed-effects model (GLMM) or a generalized estimating equation (GEE) model to explore the relationship between certain flavor perception at certain time points and predictors such as gene copy number, gum type, time and their interaction term etc. 
+-GLMM: log(p_ijk / (1 - p_ijk)) = β_0 + β_1 * gene_copy_num_i + β_2 * gum_type_j + β_3 * time_k
++ β_4 * (gene_copy_num_i × gum_type_j)
++ β_5 * (gene_copy_num_i × time_k)
++ β_6 * (gum_type_j × time_k)
++ β_7 * (gene_copy_num_i × gum_type_j × time_k)
++ u_i + v_ij
+
+where:
+p_ijk is the probability of perceiving the flavor for participant i with gene copy number j and gum type k at time t
+β_0 is the overall intercept
+β_1, β_2, β_3 are the main effects of gene copy number, gum type, and time
+β_4, β_5, β_6, β_7 are the two-way and three-way interaction effects
+u_i is the random intercept for participant i
+v_ij is the random slope for the interaction between participant i and gum type j
