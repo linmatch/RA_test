@@ -10,7 +10,7 @@ library(readr)
 library(tidyr)
 library(dplyr)
 library(stringr)
-
+library(ggplot2)
 ```
 
 ```{r}
@@ -48,6 +48,22 @@ data_summary <- data_long %>%
   summarise(mean_value = mean(Value, na.rm = TRUE), .groups = "drop")
 ```
 
+
+# What have been done:
+#### Visualization: 
+1. Correlation Matrix
+2. Comparison of Flavor Perception Between Gum Types(Side-by-Side plot)
+3. Difference of Flavor Perception Between Gum Types
+4. Comparison of Flavor Perception Between Gum Types by different copy number group
+5. Comparison of type of change in Flavor Perception by different group("CNV_group", "sAA_After_Group" etc.)
+
+#### Dim Reduction:
+1. PCA
+
+# More to do:
+## Statistical test:
+1. proportion test: Test if there is significant difference in proportion of certain flavor perception for 2 sample gums at certain time point of interest (e.g., time_1s, time_2s, etc.). 
+
 ```{r}
 data_sweet_30s <- data_long %>%
   filter(Time == 30, Attribute == "Sweet")
@@ -65,26 +81,41 @@ z_test <- prop.test(x = c(sum(data_free_limonene$Value), sum(data_starch_limonen
 print(z_test)
 ```
 
-
-# What have been done:
-#### Visualization: 
-1. Correlation Matrix
-2. Comparison of Flavor Perception Between Gum Types(Side-by-Side plot)
-3. Difference of Flavor Perception Between Gum Types
-4. Comparison of Flavor Perception Between Gum Types by different copy number group
-5. Comparison of type of change in Flavor Perception by different group("CNV_group", "sAA_After_Group" etc.)
-
-#### Dim Reduction:
-1. PCA
-
-# More to do:
-## Statistical test:
-1. proportion test: Test if there is significant difference in proportion of certain flavor perception for 2 sample gums at certain time point of interest (e.g., time_1s, time_2s, etc.). 
 2. proportion test: Test if there is significant difference in proportion of certain flavor perception for different gene copy numbers group (low vs. high) with certain sample gums (Free Limonene or Starch-Limonene Inclusion Complex) at certain time point of interest (e.g., time_1s, time_2s, etc.).
 3. Chi-square test of independence: Test if flavor perception (yes/no) and gum type are independent or if there is an association between them.
 
 ## Visualization:
 1. How sample position affect the flavor perception trend?
+```{r}
+df_long <- df_flavor %>%
+  select(-c(Blinding_Code)) %>%
+  pivot_longer(cols = starts_with("time_"),
+               names_to = "Time",
+               names_prefix = "time_", 
+               values_to = "Value") %>%
+  mutate(Time = as.numeric(str_remove(Time, "s")),
+         Sample_ID = as.factor(Sample_ID),
+         Sample_Name = ifelse(Sample_Name == "Starch-Limonene Inclusion Complex",
+                                "Starch-Limonene IC",
+                                Sample_Name),
+         Sample_Name = as.factor(Sample_Name),
+         Attribute = as.factor(Attribute))
+
+df_long$order <- with(df_long, ave(Sample_Position, Sample_ID, FUN = function(x) paste(unique(x), collapse = "-")))
+
+final_df <- df_long %>% group_by(order, Attribute, Time) %>%
+  summarise(mean = mean(Value, na.rm = TRUE), .groups = "drop")
+```
+
+
+```{r}
+ggplot(final_df, aes(x = Time, y = mean, color = Attribute)) +
+  geom_line() +
+  facet_wrap(~order) +
+  labs(x = 'Time', y = 'Proportion Perceiving Flavor', color = 'Attribute') +
+  theme_classic()
+```
+
 
 ## Statistical Modeling:
 1. Apply a generalized linear mixed-effects model (GLMM) or a generalized estimating equation (GEE) model to explore the relationship between certain flavor perception at certain time points and predictors such as gene copy number, gum type, time and their interaction term etc. 
