@@ -85,8 +85,11 @@ Note: Here, we use "df_state_breakdown" to visualize the difference between data
 
 ## Visualization 3
 ```{r}
-ggplot(df_state_pivot2, aes(x = State, y = Database/100, fill = `Demographic Group`)) +
-geom_bar(stat = "identity", position="dodge") +
+df3 <- subset(df_state_pivot2, select = -Population)
+df3 <- na.omit(df3)
+
+ggplot(df3, aes(x = State, y = Database/100, fill = `Demographic Group`)) +
+geom_bar(stat = "identity", position = position_dodge2(preserve = "single")) +
   coord_flip()+
   labs(title = "Compare composition of Database Representation of each State",
        x = "State", y = "Value",
@@ -99,8 +102,11 @@ Note: Here, we focus solely on the composition of database representation in eac
 
 ## Visualization 4
 ```{r}
-ggplot(df_state_pivot2, aes(x = State, y = Population/100, fill = `Demographic Group`)) +
-geom_bar(stat = "identity", position="dodge") +
+df4 <- subset(df_state_pivot2, select = -Database)
+df4 <- na.omit(df4)
+
+ggplot(df4, aes(x = State, y = Population/100, fill = `Demographic Group`)) +
+geom_bar(stat = "identity", position = position_dodge2(preserve = "single")) +
   coord_flip()+
   labs(title = "Compare composition of Population of each State",
        x = "State", y = "Value",

@@ -5,6 +5,19 @@ date: "2024-03-27"
 output: html_document
 ---
 
+# What have been done:
+#### Visualization: 
+1. Correlation Matrix
+2. Comparison of Flavor Perception Between Gum Types(Side-by-Side plot)
+3. Difference of Flavor Perception Between Gum Types
+4. Comparison of Flavor Perception Between Gum Types by different copy number group
+5. Comparison of type of change in Flavor Perception by different group("CNV_group", "sAA_After_Group" etc.)
+
+#### Dim Reduction:
+1. PCA
+
+# More to do:
+
 ```{r}
 library(readr)
 library(tidyr)
@@ -46,43 +59,13 @@ data_summary <- data_long %>%
 data_summary <- data_long %>%
   group_by(Sample_Name, Attribute, Time) %>%
   summarise(mean_value = mean(Value, na.rm = TRUE), .groups = "drop")
+
+ggplot(data_summary, aes(x = Time, y = mean_value, color = Attribute)) +
+  geom_line() +
+  facet_wrap(~ Sample_Name) +
+  labs(x = 'Time', y = 'Proportion Perceiving Flavor', color = 'Attribute') +
+  theme_classic()
 ```
-
-
-# What have been done:
-#### Visualization: 
-1. Correlation Matrix
-2. Comparison of Flavor Perception Between Gum Types(Side-by-Side plot)
-3. Difference of Flavor Perception Between Gum Types
-4. Comparison of Flavor Perception Between Gum Types by different copy number group
-5. Comparison of type of change in Flavor Perception by different group("CNV_group", "sAA_After_Group" etc.)
-
-#### Dim Reduction:
-1. PCA
-
-# More to do:
-## Statistical test:
-1. proportion test: Test if there is significant difference in proportion of certain flavor perception for 2 sample gums at certain time point of interest (e.g., time_1s, time_2s, etc.). 
-
-```{r}
-data_sweet_30s <- data_long %>%
-  filter(Time == 30, Attribute == "Sweet")
-
-# Extract the data for the two samples
-data_free_limonene <- data_sweet_30s %>% filter(Sample_Name == "Free Limonene")
-data_starch_limonene_ic <- data_sweet_30s %>% filter(Sample_Name == "Starch-Limonene IC")
-
-# Perform the two-proportion z-test
-z_test <- prop.test(x = c(sum(data_free_limonene$Value), sum(data_starch_limonene_ic$Value)),
-                    n = c(nrow(data_free_limonene), nrow(data_starch_limonene_ic)),
-                    alternative = "two.sided")
-
-# Print the results
-print(z_test)
-```
-
-2. proportion test: Test if there is significant difference in proportion of certain flavor perception for different gene copy numbers group (low vs. high) with certain sample gums (Free Limonene or Starch-Limonene Inclusion Complex) at certain time point of interest (e.g., time_1s, time_2s, etc.).
-3. Chi-square test of independence: Test if flavor perception (yes/no) and gum type are independent or if there is an association between them.
 
 ## Visualization:
 1. How sample position affect the flavor perception trend?
@@ -107,14 +90,40 @@ final_df <- df_long %>% group_by(order, Attribute, Time) %>%
   summarise(mean = mean(Value, na.rm = TRUE), .groups = "drop")
 ```
 
-
 ```{r}
 ggplot(final_df, aes(x = Time, y = mean, color = Attribute)) +
   geom_line() +
   facet_wrap(~order) +
-  labs(x = 'Time', y = 'Proportion Perceiving Flavor', color = 'Attribute') +
+  labs(title ='Difference of proportion Perceiving Flavor between Sample Position', x = 'Time', y = 'Proportion Perceiving Flavor', color = 'Attribute') +
   theme_classic()
 ```
+
+
+## Statistical test:
+1. proportion test: Test if there is significant difference in proportion of certain flavor perception for 2 sample gums at certain time point of interest (e.g., time_1s, time_2s, etc.). 
+```{r}
+data_sweet_30s <- data_long %>%
+  filter(Time == 30, Attribute == "Sweet")
+
+# Extract the data for the two samples
+data_free_limonene <- data_sweet_30s %>% filter(Sample_Name == "Free Limonene")
+data_starch_limonene_ic <- data_sweet_30s %>% filter(Sample_Name == "Starch-Limonene IC")
+
+# Perform the two-proportion z-test
+z_test <- prop.test(x = c(sum(data_free_limonene$Value), sum(data_starch_limonene_ic$Value)),
+                    n = c(nrow(data_free_limonene), nrow(data_starch_limonene_ic)),
+                    alternative = "two.sided")
+
+# Print the results
+print(z_test)
+```
+Note: The p value is smaller than alpha=0.5, therefore, we can reject the null hypothesis and conclude that the difference of proportion perceiving sweet between 2 gums at 30 seconds is statistically significant. 
+
+2. proportion test: Test if there is significant difference in proportion of certain flavor perception for different sample position group at certain time point of interest (e.g., time_1s, time_2s, etc.).
+
+3. proportion test: Test if there is significant difference in proportion of certain flavor perception for different gene copy numbers group (low vs. high) with certain sample gums (Free Limonene or Starch-Limonene Inclusion Complex) at certain time point of interest (e.g., time_1s, time_2s, etc.).
+
+4. Chi-square test of independence: Test if flavor perception (yes/no) and gum type are independent or if there is an association between them.
 
 
 ## Statistical Modeling:

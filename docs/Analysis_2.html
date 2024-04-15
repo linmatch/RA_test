@@ -382,7 +382,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-03-31
+<strong>Last updated:</strong> 2024-04-14
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -411,21 +411,18 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
-changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges"
+<div id="strongRMarkdownfilestronguptodate"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of
-the R Markdown file created these results, you’ll want to first commit
-it to the Git repo. If you’re still working on the analysis, you can
-ignore this warning. When you’re finished, you can run
-<code>wflow_publish</code> to commit the R Markdown file and build the
-HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
 </div>
 </div>
 </div>
@@ -501,30 +498,56 @@ run.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr
-project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/Users/linmatch/Desktop/RA/data/df_flavor.csv
+</td>
+<td style="text-align:left;">
+data/df_flavor.csv
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttree6a63437b4d3619fad894a550a7cb94f7974b7356targetblank6a63437a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttree2cd5631b12b7f5630eb3acac51133343660d8091targetblank2cd5631a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/linmatch/RA_test/tree/6a63437b4d3619fad894a550a7cb94f7974b7356" target="_blank">6a63437</a>
+<a href="https://github.com/linmatch/RA_test/tree/2cd5631b12b7f5630eb3acac51133343660d8091" target="_blank">2cd5631</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttree6a63437b4d3619fad894a550a7cb94f7974b7356targetblank6a63437a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomlinmatchRAtesttree2cd5631b12b7f5630eb3acac51133343660d8091targetblank2cd5631a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -534,7 +557,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/linmatch/RA_test/tree/6a63437b4d3619fad894a550a7cb94f7974b7356" target="_blank">6a63437</a>.
+<a href="https://github.com/linmatch/RA_test/tree/2cd5631b12b7f5630eb3acac51133343660d8091" target="_blank">2cd5631</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -553,13 +576,6 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
-
-Untracked files:
-    Untracked:  data/df_flavor.csv
-
-Unstaged changes:
-    Modified:   analysis/Analysis_1.Rmd
-    Modified:   analysis/Analysis_2.Rmd
 
 </code></pre>
 <p>
@@ -610,6 +626,91 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/linmatch/RA_test/blob/2cd5631b12b7f5630eb3acac51133343660d8091/analysis/Analysis_2.Rmd" target="_blank">2cd5631</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-04-14
+</td>
+<td>
+mycom
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/3a65d0ade42737fcaf1c732b6654f48ced5d8b7c/analysis/Analysis_2.Rmd" target="_blank">3a65d0a</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-04-14
+</td>
+<td>
+mycom
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/15dc0381091f996db5e40ae0d062efaa411ed0d4/analysis/Analysis_2.Rmd" target="_blank">15dc038</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-04-01
+</td>
+<td>
+6th
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/linmatch/RA_test/blob/6e4faf5bc7f2942eeff84753ddb876bdcc40a2cb/analysis/Analysis_2.Rmd" target="_blank">6e4faf5</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-31
+</td>
+<td>
+5th com
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/linmatch/RA_test/6e4faf5bc7f2942eeff84753ddb876bdcc40a2cb/docs/Analysis_2.html" target="_blank">6e4faf5</a>
+</td>
+<td>
+linmatch
+</td>
+<td>
+2024-03-31
+</td>
+<td>
+5th com
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/linmatch/RA_test/blob/f69f746eb2f42841843aba1db1fc6c0a1cc78532/analysis/Analysis_2.Rmd" target="_blank">f69f746</a>
 </td>
 <td>
@@ -646,8 +747,20 @@ initial change
 </div>
 </div>
 </div>
-<pre class="r"><code>library(readr)</code></pre>
-<pre class="r"><code>df_flavor &lt;- read_csv(&quot;data/df_flavor.csv&quot;)</code></pre>
+<pre class="r"><code>library(readr)
+library(tidyr)
+library(dplyr)</code></pre>
+<pre><code>
+Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(stringr)
+library(ggplot2)</code></pre>
+<pre class="r"><code>df_flavor &lt;- read_csv(&quot;/Users/linmatch/Desktop/RA/data/df_flavor.csv&quot;)</code></pre>
 <pre><code>Rows: 1200 Columns: 126
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
@@ -657,6 +770,27 @@ dbl (124): Sample_ID, Sample_Position, Blinding_Code, time_0s, time_1s, time...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>#View(df_flavor)</code></pre>
+<pre class="r"><code>data_long &lt;- df_flavor %&gt;%
+  select(-c(Blinding_Code, Sample_Position)) %&gt;%
+  pivot_longer(cols = starts_with(&quot;time_&quot;),
+               names_to = &quot;Time&quot;,
+               names_prefix = &quot;time_&quot;, 
+               values_to = &quot;Value&quot;) %&gt;%
+  mutate(Time = as.numeric(str_remove(Time, &quot;s&quot;)),
+         Sample_ID = as.factor(Sample_ID),
+         Sample_Name = ifelse(Sample_Name == &quot;Starch-Limonene Inclusion Complex&quot;,
+                                &quot;Starch-Limonene IC&quot;,
+                                Sample_Name),
+         Sample_Name = as.factor(Sample_Name),
+         Attribute = as.factor(Attribute))</code></pre>
+<pre class="r"><code>data_summary &lt;- data_long %&gt;%
+  group_by(Sample_Name, Attribute) %&gt;%
+  summarise(mean = mean(Value, na.rm = TRUE),
+            sd = sd(Value, na.rm = TRUE),
+            .groups = &quot;drop&quot;)  # drop grouping afterwards</code></pre>
+<pre class="r"><code>data_summary &lt;- data_long %&gt;%
+  group_by(Sample_Name, Attribute, Time) %&gt;%
+  summarise(mean_value = mean(Value, na.rm = TRUE), .groups = &quot;drop&quot;)</code></pre>
 <div id="what-have-been-done" class="section level1">
 <h1>What have been done:</h1>
 <div id="visualization" class="section level4">
@@ -668,7 +802,7 @@ plot)</li>
 <li>Difference of Flavor Perception Between Gum Types</li>
 <li>Comparison of Flavor Perception Between Gum Types by different copy
 number group</li>
-<li>Comparison of change in Flavor Perception by different
+<li>Comparison of type of change in Flavor Perception by different
 group(“CNV_group”, “sAA_After_Group” etc.)</li>
 </ol>
 </div>
@@ -684,28 +818,100 @@ group(“CNV_group”, “sAA_After_Group” etc.)</li>
 <div id="statistical-test" class="section level2">
 <h2>Statistical test:</h2>
 <ol style="list-style-type: decimal">
-<li>ANOVA test: Test if there is significant difference of certain
-flavor perception for 2 sample gums at certain time point.</li>
-<li>ANOVA test: Test if there is significant difference of certain
-flavor perception for different gene copy numbers group (low vs. high)
-with certain sample gums at certain time point.</li>
+<li>proportion test: Test if there is significant difference in
+proportion of certain flavor perception for 2 sample gums at certain
+time point of interest (e.g., time_1s, time_2s, etc.).</li>
+</ol>
+<pre class="r"><code>data_sweet_30s &lt;- data_long %&gt;%
+  filter(Time == 30, Attribute == &quot;Sweet&quot;)
+
+# Extract the data for the two samples
+data_free_limonene &lt;- data_sweet_30s %&gt;% filter(Sample_Name == &quot;Free Limonene&quot;)
+data_starch_limonene_ic &lt;- data_sweet_30s %&gt;% filter(Sample_Name == &quot;Starch-Limonene IC&quot;)
+
+# Perform the two-proportion z-test
+z_test &lt;- prop.test(x = c(sum(data_free_limonene$Value), sum(data_starch_limonene_ic$Value)),
+                    n = c(nrow(data_free_limonene), nrow(data_starch_limonene_ic)),
+                    alternative = &quot;two.sided&quot;)
+
+# Print the results
+print(z_test)</code></pre>
+<pre><code>
+    2-sample test for equality of proportions with continuity correction
+
+data:  c(sum(data_free_limonene$Value), sum(data_starch_limonene_ic$Value)) out of c(nrow(data_free_limonene), nrow(data_starch_limonene_ic))
+X-squared = 20.2, df = 1, p-value = 6.976e-06
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ 0.176429 0.443571
+sample estimates:
+prop 1 prop 2 
+  0.82   0.51 </code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>proportion test: Test if there is significant difference in
+proportion of certain flavor perception for different gene copy numbers
+group (low vs. high) with certain sample gums (Free Limonene or
+Starch-Limonene Inclusion Complex) at certain time point of interest
+(e.g., time_1s, time_2s, etc.).</li>
+<li>Chi-square test of independence: Test if flavor perception (yes/no)
+and gum type are independent or if there is an association between
+them.</li>
 </ol>
 </div>
 <div id="visualization-1" class="section level2">
 <h2>Visualization:</h2>
 <ol style="list-style-type: decimal">
-<li>How sample position affect the flavor perception trend</li>
+<li>How sample position affect the flavor perception trend?</li>
 </ol>
+<pre class="r"><code>df_long &lt;- df_flavor %&gt;%
+  select(-c(Blinding_Code)) %&gt;%
+  pivot_longer(cols = starts_with(&quot;time_&quot;),
+               names_to = &quot;Time&quot;,
+               names_prefix = &quot;time_&quot;, 
+               values_to = &quot;Value&quot;) %&gt;%
+  mutate(Time = as.numeric(str_remove(Time, &quot;s&quot;)),
+         Sample_ID = as.factor(Sample_ID),
+         Sample_Name = ifelse(Sample_Name == &quot;Starch-Limonene Inclusion Complex&quot;,
+                                &quot;Starch-Limonene IC&quot;,
+                                Sample_Name),
+         Sample_Name = as.factor(Sample_Name),
+         Attribute = as.factor(Attribute))
+
+df_long$order &lt;- with(df_long, ave(Sample_Position, Sample_ID, FUN = function(x) paste(unique(x), collapse = &quot;-&quot;)))
+
+final_df &lt;- df_long %&gt;% group_by(order, Attribute, Time) %&gt;%
+  summarise(mean = mean(Value, na.rm = TRUE), .groups = &quot;drop&quot;)</code></pre>
+<pre class="r"><code>ggplot(final_df, aes(x = Time, y = mean, color = Attribute)) +
+  geom_line() +
+  facet_wrap(~order) +
+  labs(x = &#39;Time&#39;, y = &#39;Proportion Perceiving Flavor&#39;, color = &#39;Attribute&#39;) +
+  theme_classic()</code></pre>
+<p><img src="figure/Analysis_2.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
-<div id="prediction-inference" class="section level2">
-<h2>Prediction &amp; Inference:</h2>
+<div id="statistical-modeling" class="section level2">
+<h2>Statistical Modeling:</h2>
 <ol style="list-style-type: decimal">
-<li>Use time series forecasting models (e.g., ARIMA) to predict future
-flavor perception trends based on historical data.</li>
-<li>Apply regression model to explore the relationship between certain
-flavor perception at certain time points and predictors such as gene
-copy number, age, gender, race etc.</li>
+<li>Apply a generalized linear mixed-effects model (GLMM) or a
+generalized estimating equation (GEE) model to explore the relationship
+between certain flavor perception at certain time points and predictors
+such as gene copy number, gum type, time and their interaction term etc.
+-GLMM: log(p_ijk / (1 - p_ijk)) = β_0 + β_1 * gene_copy_num_i + β_2 *
+gum_type_j + β_3 * time_k</li>
 </ol>
+<ul>
+<li>β_4 * (gene_copy_num_i × gum_type_j)</li>
+<li>β_5 * (gene_copy_num_i × time_k)</li>
+<li>β_6 * (gum_type_j × time_k)</li>
+<li>β_7 * (gene_copy_num_i × gum_type_j × time_k)</li>
+<li>u_i + v_ij</li>
+</ul>
+<p>where: p_ijk is the probability of perceiving the flavor for
+participant i with gene copy number j and gum type k at time t β_0 is
+the overall intercept β_1, β_2, β_3 are the main effects of gene copy
+number, gum type, and time β_4, β_5, β_6, β_7 are the two-way and
+three-way interaction effects u_i is the random intercept for
+participant i v_ij is the random slope for the interaction between
+participant i and gum type j</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -733,22 +939,26 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] readr_2.1.5     workflowr_1.7.1
+[1] ggplot2_3.4.4   stringr_1.5.1   dplyr_1.1.4     tidyr_1.3.1    
+[5] readr_2.1.5     workflowr_1.7.1
 
 loaded via a namespace (and not attached):
- [1] bit_4.0.5         archive_1.1.7     jsonlite_1.8.8    crayon_1.5.2     
- [5] compiler_4.3.2    promises_1.2.1    tidyselect_1.2.0  Rcpp_1.0.12      
- [9] stringr_1.5.1     git2r_0.33.0      parallel_4.3.2    callr_3.7.3      
-[13] later_1.3.2       jquerylib_0.1.4   yaml_2.3.8        fastmap_1.1.1    
-[17] R6_2.5.1          knitr_1.45        tibble_3.2.1      rprojroot_2.0.4  
-[21] tzdb_0.4.0        bslib_0.6.1       pillar_1.9.0      rlang_1.1.3      
-[25] utf8_1.2.4        cachem_1.0.8      stringi_1.8.3     httpuv_1.6.14    
-[29] xfun_0.41         getPass_0.2-4     fs_1.6.3          sass_0.4.8       
-[33] bit64_4.0.5       cli_3.6.2         magrittr_2.0.3    ps_1.7.6         
-[37] digest_0.6.34     processx_3.8.3    vroom_1.6.5       rstudioapi_0.15.0
-[41] hms_1.1.3         lifecycle_1.0.4   vctrs_0.6.5       evaluate_0.23    
-[45] glue_1.7.0        whisker_0.4.1     fansi_1.0.6       rmarkdown_2.25   
-[49] httr_1.4.7        tools_4.3.2       pkgconfig_2.0.3   htmltools_0.5.7  </code></pre>
+ [1] sass_0.4.8        utf8_1.2.4        generics_0.1.3    stringi_1.8.3    
+ [5] hms_1.1.3         digest_0.6.34     magrittr_2.0.3    evaluate_0.23    
+ [9] grid_4.3.2        fastmap_1.1.1     rprojroot_2.0.4   jsonlite_1.8.8   
+[13] processx_3.8.3    whisker_0.4.1     ps_1.7.6          promises_1.2.1   
+[17] httr_1.4.7        purrr_1.0.2       fansi_1.0.6       scales_1.3.0     
+[21] jquerylib_0.1.4   cli_3.6.2         crayon_1.5.2      rlang_1.1.3      
+[25] bit64_4.0.5       munsell_0.5.0     withr_3.0.0       cachem_1.0.8     
+[29] yaml_2.3.8        parallel_4.3.2    tools_4.3.2       tzdb_0.4.0       
+[33] colorspace_2.1-0  httpuv_1.6.14     vctrs_0.6.5       R6_2.5.1         
+[37] lifecycle_1.0.4   git2r_0.33.0      bit_4.0.5         fs_1.6.3         
+[41] vroom_1.6.5       archive_1.1.7     pkgconfig_2.0.3   callr_3.7.3      
+[45] pillar_1.9.0      bslib_0.6.1       later_1.3.2       gtable_0.3.4     
+[49] glue_1.7.0        Rcpp_1.0.12       xfun_0.41         tibble_3.2.1     
+[53] tidyselect_1.2.0  highr_0.10        rstudioapi_0.15.0 knitr_1.45       
+[57] farver_2.1.1      htmltools_0.5.7   labeling_0.4.3    rmarkdown_2.25   
+[61] compiler_4.3.2    getPass_0.2-4    </code></pre>
 </div>
 </div>
 </div>
