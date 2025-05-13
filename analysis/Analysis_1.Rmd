@@ -16,9 +16,9 @@ library(ggsci)
 
 # Import Data
 ```{r}
-df_state_total <- read_csv("/Users/linmatch/Desktop/RA/data/df_state_total.csv")
+df_state_total <- read_csv("～/Desktop/RA/data/df_state_total.csv")
 #View(df_state_total)
-df_state_breakdown <- read_csv("/Users/linmatch/Desktop/RA/data/df_state-breakdown.csv")
+df_state_breakdown <- read_csv("～/Desktop/RA/data/df_state-breakdown.csv")
 ```
 
 # Data preparation
