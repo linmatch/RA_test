@@ -27,7 +27,7 @@ library(ggplot2)
 ```
 
 ```{r}
-df_flavor <- read_csv("/Users/linmatch/Desktop/RA/data/df_flavor.csv")
+df_flavor <- read_csv("～/Desktop/RA/data/df_flavor.csv")
 #View(df_flavor)
 ```
 
